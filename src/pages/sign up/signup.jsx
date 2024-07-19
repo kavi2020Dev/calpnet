@@ -42,7 +42,7 @@ const Signup = () => {
     try {
      await setTimeout(() => {
        setIsLoader(false)
-      //  navigate('/signup')
+       navigate('/registration')
      },2000)
     } catch (error) {
      setIsLoader(false)

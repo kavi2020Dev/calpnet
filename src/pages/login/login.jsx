@@ -42,7 +42,7 @@ const OnAuthLogin = async() => {
     dispatch(showSnackBar({message :'Login successfully', type:'success'}))
     await setTimeout(() => {
       setIsLoader(false)
-      // navigate('/signup')
+      navigate('/chooseone')
     },2000)
   } 
   else{

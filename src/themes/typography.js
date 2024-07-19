@@ -13,11 +13,11 @@ import Colors from "../utils/colors"
           fontWeight: 500,
         },
         h3: {
-          fontSize: '1.50rem',
+          fontSize: '1.15rem',
           fontWeight: 400,
         },
          h4: {
-          fontSize: '1.25rem',
+          fontSize: '1.05rem',
           fontWeight: 400,
         },
         h5: {

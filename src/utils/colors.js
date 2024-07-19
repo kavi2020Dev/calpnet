@@ -12,9 +12,12 @@ const Colors = {
     contrastText: "#fff",
   },
   grey:{
+   50 :'#F8F8F8',  
    100 :'#E5E1DA',
    200 :'#7D7C7C',
-   300 :''  
+  },
+  green : {
+   100 : '#14B45E' 
   }
 };
 
