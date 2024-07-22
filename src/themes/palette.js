@@ -17,7 +17,11 @@ const Palette = ( mode ) => ({
       contrastText: Colors.secondary.contrastText,
     },
     grey : {
-      50 : Colors?.grey?.[50]
+      50 : Colors?.grey?.[50],
+      100 : Colors?.grey?.[100],
+      200 : Colors?.grey?.[200],
+      400 : Colors?.grey?.[400],
+      500 : Colors?.grey?.[500]
     },
     green :{
      100 : Colors.green?.[100] 

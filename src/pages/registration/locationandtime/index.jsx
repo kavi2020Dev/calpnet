@@ -112,7 +112,7 @@ const LocationAndTime = ({ setActive }) => {
           )}
         />
 
-        <div className='w-full flex justify-between pt-2'>
+        <div className='w-full flex justify-between pt-2 '>
           <div className='w-1/2 pr-1'>
             <div className='flex'>
               <Typography variant='h6' pr={0.2}>

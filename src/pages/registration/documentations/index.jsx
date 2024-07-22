@@ -1,30 +1,31 @@
-import { TextField, Typography, useTheme } from "@mui/material";
+import { Button, TextField, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { useFormik } from "formik";
 import React from "react";
 import * as Yup from "yup";
-import Button from '../../../components/button/customizeButton'
+import CustomizeButton from '../../../components/button/customizeButton'
+import Dropzone from "../../../components/dropzone/dropzone";
+import { useNavigate } from "react-router-dom";
 
 const Documatation = ({setActive}) => {
   const theme = useTheme();
+  const navigate = useNavigate()
 
   const validationSchema = Yup.object().shape({
-    organization_name: Yup.string().required("Organization is required"),
-    project_name: Yup.string().required("Project name is required"),
-    project_description: Yup.string().required(
-      "Project description is required"
-    ),
+    total: Yup.string().required("Total cost is required"),
+    initail: Yup.string().required("Intial cost name is required"),
+    document: Yup.array().min(1, 'Document is required'),
   });
 
   const initialValues = {
     total: "",
     initail : "",
-    document : null,
+    document : [],
   };
 
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: validationSchema,
-    onSubmit: () => setActive(3),
+    onSubmit: () => navigate('/dashboard') ,
   });
 
   return (
@@ -42,20 +43,20 @@ const Documatation = ({setActive}) => {
           </Typography>
         </div>
         <TextField
-          id='organization_name'
-          name='organization_name'
+          id='total'
+          name='total'
           size='small'
           placeholder='Enter here'
           focused={false}
           fullWidth
-          value={formik?.values?.organization_name}
+          value={formik?.values?.total}
           onChange={formik?.handleChange}
           error={Boolean(
-            formik.errors.organization_name && formik.touched.organization_name
+            formik.errors.total && formik.touched.total
           )}
           helperText={
-            formik.errors.organization_name && formik.touched.organization_name
-              ? formik.errors.organization_name
+            formik.errors.total && formik.touched.total
+              ? formik.errors.total
               : ""
           }
           sx={{
@@ -66,27 +67,27 @@ const Documatation = ({setActive}) => {
 
         <div className='flex'>
           <Typography variant='h6' pr={0.2}>
-          Initial Cost
+            Initial Cost
           </Typography>
           <Typography variant='h6' color={theme?.palette?.error?.light}>
             *
           </Typography>
         </div>
         <TextField
-          id='project_name'
-          name='project_name'
+          id='initail'
+          name='initail'
           size='small'
           placeholder='Enter here'
           focused={false}
           fullWidth
-          value={formik?.values?.project_name}
+          value={formik?.values?.initail}
           onChange={formik?.handleChange}
           error={Boolean(
-            formik.errors.project_name && formik.touched.project_name
+            formik.errors.initail && formik.touched.initail
           )}
           helperText={
-            formik.errors.project_name && formik.touched.project_name
-              ? formik.errors.project_name
+            formik.errors.initail && formik.touched.initail
+              ? formik.errors.initail
               : ""
           }
           sx={{
@@ -97,49 +98,47 @@ const Documatation = ({setActive}) => {
 
         <div className='flex'>
           <Typography variant='h6' pr={0.2}>
-            Project Description
+           Supported Documents
           </Typography>
           <Typography variant='h6' color={theme?.palette?.error?.light}>
             *
           </Typography>
         </div>
-        <TextField
-          id='project_description'
-          name='project_description'
-          size='small'
-          multiline
-          placeholder='Enter here'
-          focused={false}
-          rows={4}
-          fullWidth
-          value={formik?.values?.project_description}
-          onChange={formik?.handleChange}
-          error={Boolean(
-            formik.errors.project_description &&
-              formik.touched.project_description
-          )}
-          helperText={
-            formik.errors.project_description &&
-            formik.touched.project_description
-              ? formik.errors.project_description
-              : ""
-          }
-          sx={{
-            marginBlockEnd: "8px",
-            marginInlineStart: "1px",
-          }}
+        <Dropzone
+         files={formik?.values?.document}
+         onDrop={(acceptedFiles) => formik?.setFieldValue('document', acceptedFiles)}
+         error={Boolean(formik.errors.document && formik.touched.document)}
+         helpertext={formik.errors.document && formik.touched.document ? formik.errors.document : ""}
         />
       </div>
 
-      <div className="flex justify-end">
-      <Button
-        isLoader={false}
-        title='Next'
-        styleOne={{ paddingBlock: "10.1px" , width:'120px', borderRadius:'25px'}}
-        btnStyle={{ paddingBlock: "4px", width:'90px', borderRadius:'25px'}}
-        onClick={formik?.handleSubmit}
-      />
-      </div>
+      <div className='flex justify-between' style={{marginBlockStart:'10px'}}>
+
+          <Button style={{
+             paddingBlock:'3px', borderRadius:'25px',
+             fontSize:'0.75rem', color: theme?.palette?.common?.black,
+             borderStyle:'solid', 
+             borderWidth:'1px', 
+             width:'80px',
+             borderColor:theme?.palette?.grey[300]}} onClick={()=>setActive(1)}>Back</Button>
+      
+
+          <CustomizeButton
+            isLoader={false}
+            title='Next'
+            styleOne={{
+              paddingBlock: "10.1px",
+              width: "120px",
+              borderRadius: "25px",
+            }}
+            btnStyle={{
+              paddingBlock: "4px",
+              width: "90px",
+              borderRadius: "25px",
+            }}
+            onClick={formik?.handleSubmit}
+          />
+        </div>
     </>
   );
 };
