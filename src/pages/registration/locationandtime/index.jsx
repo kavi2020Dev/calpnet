@@ -53,7 +53,7 @@ const LocationAndTime = ({ setActive }) => {
           onChange={(_, newValue) => formik?.setFieldValue("place", newValue)}
           options={[
             { name: "Coimbatore", id: 1 },
-            { id: 2, name: "Chennai", id: 2 },
+            {name: "Chennai", id: 2 },
             { name: "Madurai", id: 3 },
           ]}
           getOptionLabel={(option) => option.name}
